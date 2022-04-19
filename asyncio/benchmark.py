@@ -46,19 +46,20 @@ def main_normal():
 
 @aiomeasure
 async def main_aio():
-    print("main_aio")
+    print("asyncio")
     r = await asyncio.gather(*[aiocalc(i) for i in range(1, 16)])
     print(r)
 
 @measure
 def main_ppe():
-    print("ppe")
+    print("PPE")
     with PPE(max_workers=16) as exe:
         r = [r for r in exe.map(calc, list(range(1, 16)))]
     print(r)
 
 @measure
 def main_tpe():
+    print("TPE")
     with TPE(max_workers=16) as exe:
         r = [r for r in exe.map(calc, list(range(1, 16)))]
     print(r)
